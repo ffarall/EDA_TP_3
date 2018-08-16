@@ -27,7 +27,7 @@
     <ClInclude Include="Drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="Common_header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

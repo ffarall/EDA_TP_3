@@ -1,4 +1,8 @@
-#pragma once
+#ifndef _ROBOT_H
+#define _ROBOT_H
+
+#include "Common_header.h"
+
 class Robot
 {
 	pos_t pos;
@@ -8,29 +12,9 @@ class Robot
 
 public:
 
-	void initRobot(uint Hcount, uint Wcount);
-	void moveRobot(void);
-	pos_t getRobotPos();
-};
-//cosas que agregue
-#pragma once
-#ifndef _ROBOT_H
-#define _ROBOT_H
-
-#include "Header.h"
-
-class Robot
-{
-	pos_t pos;
-	double dir;
-	uint Hcount;
-	uint Wcount;
-
-public:
-
-	void initRobot(uint Hcount, uint Wcount);
-	void moveRobot(void);
-	pos_t getRobotPos();
+	void init_robot(uint Hcount, uint Wcount);
+	void move_robot(void);
+	pos_t get_robotPos();
 };
 
 #endif

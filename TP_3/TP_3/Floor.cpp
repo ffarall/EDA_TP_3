@@ -11,7 +11,6 @@ Floor::~Floor()
 {
 }
 
-#include "Floor.h"
 
 Floor::Floor(uint h, uint w)
 {

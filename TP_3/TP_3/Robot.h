@@ -1,16 +1,9 @@
 #pragma once
-class Robot
-{
-public:
-	Robot();
-	~Robot();
-};
-//cosas que agregue
-#pragma once
+
 #ifndef _ROBOT_H
 #define _ROBOT_H
 
-#include "Header.h"
+#include "Link.h"
 
 class Robot
 {
@@ -26,4 +19,11 @@ public:
 	pos_t getRobotPos();
 };
 
+class Robot
+{
+public:
+	Robot();
+	~Robot();
+};
+//cosas que agregue
 #endif

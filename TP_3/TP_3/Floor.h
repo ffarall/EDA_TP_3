@@ -1,11 +1,21 @@
 class Floor
 {
 	bool *tiles;
-	int wcount;
-	int hcount;
+	int wCount;
+	int hCount;
 public:
-	Floor();
+	Floor(uint h, uint w);
 	~Floor();
+
+	uint get_height();
+	uint get_width();
+
+	bool is_dirty(uint x, uint y);
+	bool is_floorClean();
+	void clean_tile(uint x, uint y);
+	void clean_tile(pos_t pos);
+	void destroy();
+	errorType get_err();
 };
 
 //cosas que tenia

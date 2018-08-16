@@ -1,9 +1,16 @@
 #pragma once
 class Robot
 {
+	pos_t pos;
+	double dir;
+	uint hCount;
+	uint wCount;
+
 public:
-	Robot();
-	~Robot();
+
+	void initRobot(uint Hcount, uint Wcount);
+	void moveRobot(void);
+	pos_t getRobotPos();
 };
 //cosas que agregue
 #pragma once

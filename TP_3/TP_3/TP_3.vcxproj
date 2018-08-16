@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Simulator.h" />
   </ItemGroup>

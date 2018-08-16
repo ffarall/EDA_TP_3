@@ -1,14 +1,3 @@
-class Floor
-{
-	bool *tiles;
-	int wcount;
-	int hcount;
-public:
-	Floor();
-	~Floor();
-};
-
-//cosas que tenia
 #pragma once
 #ifndef _FLOOR_H
 #define _FLOOR_H
@@ -16,9 +5,9 @@ public:
 #define CLEAN true
 #define DIRTY false
 
-#include "Header.h"
+#include "Link.h"
 
-class Piso
+class Floor
 {
 	bool * baldosas;
 	uint Hcount;
@@ -29,7 +18,7 @@ class Piso
 
 public:
 
-	Piso(uint h, uint w);
+	Floor(uint h, uint w);
 
 	uint getHeight();
 	uint getWidth();

@@ -27,7 +27,7 @@ typedef struct
 {
 	string detail;
 	errNo_t errorNum;
-}errorType;
+}errorType_t;
 
 typedef struct
 {

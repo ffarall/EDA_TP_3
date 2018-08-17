@@ -8,6 +8,7 @@ class Floor
 	bool *tiles;
 	int wCount;
 	int hCount;
+	errorType_t err;
 public:
 	Floor(uint h, uint w);
 	~Floor();

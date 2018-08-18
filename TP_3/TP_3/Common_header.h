@@ -13,6 +13,8 @@ DEFINES
 **********************************/
 #define CLEAN true
 #define DIRTY false
+#define PI 3.14159265359
+#define PRECISION 1000
 
 /**********************************
 TYPEDEFS AND NAMESPACE

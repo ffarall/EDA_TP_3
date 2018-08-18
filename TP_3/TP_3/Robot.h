@@ -12,8 +12,8 @@ class Robot
 
 public:
 
-	void init_robot(uint Hcount, uint Wcount);
-	void move_robot(void);
+	void init_robot(uint hCount, uint wCount);
+	void move_robot(double unit);
 	pos_t get_robotPos();
 };
 

@@ -12,7 +12,7 @@ class Simulator
 	uint robotCount;
 	Robot * robots;
 	Floor p;
-	errorType err;
+	errorType_t err;
 public:
 	Simulator(uint robotCount, string mode, uint w, uint h);
 	~Simulator();
@@ -23,7 +23,7 @@ public:
 	uint get_tickCount();
 	uint get_robotCount();
 	void destroy();
-	errorType get_error();
+	errorType_t get_error();
 };
 
 #endif // !_SIMULATOR_

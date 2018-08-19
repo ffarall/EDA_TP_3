@@ -18,12 +18,12 @@ class Drawer
 	ALLEGRO_DISPLAY * display;
 	ALLEGRO_BITMAP * robotImage;
 	ALLEGRO_BITMAP * dirtImage;
-	int DISP_WIDTH;
-	int DISP_HEIGHT;
+	int dispWidth;
+	int dispHeight;
 	uint Hcount;
 	uint Wcount;
 	errorType_t err;
-	//Robot * robots;
+	Robot * robots;
 	Floor * floor;
 
 public:
@@ -31,9 +31,7 @@ public:
 	
 	void allegro_init();
 	void allegro_destroy();
-	void draw_init_display();			
-	void draw_tile(uint w, uint h);
-	void draw_robot();
+	void draw_init_display();
 	void update_display();
 };
 

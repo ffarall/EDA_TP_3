@@ -2,7 +2,7 @@
 #define _ROBOT_H
 
 #include "Common_header.h"
-/*
+
 class Robot
 {
 	pos_t pos;
@@ -16,5 +16,5 @@ public:
 	void move_robot(void);
 	pos_t get_robotPos();
 };
-*/
+
 #endif

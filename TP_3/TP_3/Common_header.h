@@ -15,6 +15,10 @@ DEFINES
 #define DIRTY false
 #define PI 3.14159265359
 #define PRECISION 1000
+#define MAX_SIM 10000
+#define MIN_DIF_SIM 0.1
+#define AVERAGE_CONST 1000
+#define _DEBUG_ 0
 
 /**********************************
 TYPEDEFS AND NAMESPACE
@@ -36,5 +40,10 @@ typedef struct
 	double x;
 	double y;
 }pos_t;
+
+/*******************************
+FUNCTION PORTOTIPES
+*******************************/
+
 
 #endif

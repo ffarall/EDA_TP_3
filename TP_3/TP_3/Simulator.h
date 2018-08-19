@@ -8,20 +8,24 @@
 class Simulator
 {
 	uint tickCount;
-	string mode;
+	uint mode;
 	uint robotCount;
 	Robot * robots;
-	Floor p;
+	Floor floor;
+	double unit;
 	errorType_t err;
+
+	void one_sim();
 public:
-	Simulator(uint robotCount, string mode, uint w, uint h);
+	Simulator(uint rc, uint mod, uint w, uint h, double u);
 	~Simulator();
 
-	string getMode();
+	uint getMode();
 
 	uint simulate();
 	uint get_tickCount();
 	uint get_robotCount();
+	void restart_tickCount();
 	void destroy();
 	errorType_t get_error();
 };

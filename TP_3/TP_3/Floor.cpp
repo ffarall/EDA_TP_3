@@ -1,18 +1,12 @@
 #include "Floor.h"
 
 
-
-Floor::Floor()
-{
-}
-
-
 Floor::Floor(uint h, uint w)
 {
 	tiles = (bool *)malloc(h * w * sizeof(bool));
 	if (tiles != NULL)
 	{
-		for (int i = 0; i < h*w; i++)
+		for (int i = 0; i < (h*w); i++)
 		{
 			tiles[i] = true; // Se inicializan las baldozas sucias.
 		}
@@ -23,6 +17,9 @@ Floor::Floor(uint h, uint w)
 		err.errorNum = NO_MEM;
 		err.detail = "No memory in construction of Floor.\n";
 	}
+
+	hCount = h;
+	wCount = w;
 }
 
 Floor::~Floor()
@@ -63,7 +60,7 @@ bool Floor::is_floorClean()
 		ret = tiles[i];
 		i++;
 	}
-	return ret;
+	return !ret;
 }
 
 void Floor::clean_tile(uint x, uint y)

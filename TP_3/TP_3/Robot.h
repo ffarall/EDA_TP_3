@@ -2,6 +2,7 @@
 #define _ROBOT_H
 
 #include "Common_header.h"
+#include <time.h>
 
 class Robot
 {
@@ -11,8 +12,10 @@ class Robot
 	uint wCount;
 
 public:
+	Robot();
+	~Robot();
 
-	void init_robot(uint hCount, uint wCount);
+	void init_robot(uint h, uint w);
 	void move_robot(double unit);
 	pos_t get_robotPos();
 };

@@ -120,15 +120,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="callback.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Common_header.h" />
+    <ClInclude Include="parse_cmd_line.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Simulator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="callback.c" />
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="parse_cmd_line.c" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Simulator.cpp" />
   </ItemGroup>

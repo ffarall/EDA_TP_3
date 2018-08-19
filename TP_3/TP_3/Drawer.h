@@ -2,12 +2,13 @@
 #ifndef _DRAWER_
 #define _DRAWER_
 
-#define DISP_WIDTH 800
-#define DISP_HEIGHT 800
+#define SINGLE_TILE 25
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_color.h>
+#include <allegro5/allegro_primitives.h>
 #include "Common_header.h"
 #include "Floor.h"
 #include "Robot.h"
@@ -16,6 +17,9 @@ class Drawer
 {
 	ALLEGRO_DISPLAY * display;
 	ALLEGRO_BITMAP * robotImage;
+	ALLEGRO_BITMAP * dirtImage;
+	uint DISP_WIDTH;
+	uint DISP_HEIGHT;
 	uint Hcount;
 	uint Wcount;
 	errNo_t err;
@@ -27,8 +31,6 @@ public:
 	
 	void allegro_init();
 	void allegro_destroy();
-	void draw_tile();				//pintar solo las baldosas
-	void draw_robot();				//pintar solo los robots
 	void draw_display();			//metodo que, utilizando las funciones de arriba, pinta todo el display
 };
 

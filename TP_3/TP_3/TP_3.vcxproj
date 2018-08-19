@@ -74,6 +74,7 @@
     <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -129,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Simulator.cpp" />
   </ItemGroup>

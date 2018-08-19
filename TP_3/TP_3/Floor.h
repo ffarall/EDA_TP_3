@@ -21,7 +21,7 @@ public:
 	void clean_tile(uint x, uint y);
 	void clean_tile(pos_t pos);
 	void destroy();
-	errorType get_err();
+	errNo_t get_err();
 };
 
 #endif

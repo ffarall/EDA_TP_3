@@ -2,7 +2,7 @@
 #ifndef _DRAWER_
 #define _DRAWER_
 
-#define SINGLE_TILE 25
+#define SINGLE_TILE 50
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -18,12 +18,12 @@ class Drawer
 	ALLEGRO_DISPLAY * display;
 	ALLEGRO_BITMAP * robotImage;
 	ALLEGRO_BITMAP * dirtImage;
-	uint DISP_WIDTH;
-	uint DISP_HEIGHT;
+	int DISP_WIDTH;
+	int DISP_HEIGHT;
 	uint Hcount;
 	uint Wcount;
-	errNo_t err;
-	Robot * robots;
+	errorType_t err;
+	//Robot * robots;
 	Floor * floor;
 
 public:
@@ -31,7 +31,10 @@ public:
 	
 	void allegro_init();
 	void allegro_destroy();
-	void draw_display();			//metodo que, utilizando las funciones de arriba, pinta todo el display
+	void draw_init_display();			
+	void draw_tile(uint w, uint h);
+	void draw_robot();
+	void update_display();
 };
 
 #endif

@@ -2,7 +2,7 @@
 #define _ROBOT_H
 
 #include "Common_header.h"
-
+/*
 class Robot
 {
 	pos_t pos;
@@ -11,10 +11,10 @@ class Robot
 	uint wCount;
 
 public:
-
+	Robot(uint w, uint h);
 	void init_robot(uint Hcount, uint Wcount);
 	void move_robot(void);
 	pos_t get_robotPos();
 };
-
+*/
 #endif

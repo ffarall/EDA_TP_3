@@ -11,7 +11,6 @@ class Floor
 	errorType_t err;
 public:
 	Floor(uint h, uint w);
-	~Floor();
 
 	uint get_height();
 	uint get_width();

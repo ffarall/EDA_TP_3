@@ -37,17 +37,16 @@ uint Simulator::simulate()
 			{
 				one_sim();
 				tickCount++;
-				draw.update_display(robots, floor);	// CAMBIAR POR DIBUJAR EL PISO
-				al_rest(0.1);							// CAMBIAR POR ESPERA EN SEGUNDOS
+				draw.update_display(robots, floor);		
+				al_rest(0.1);							
 			}
 			draw.show_ticks(tickCount);
-			getchar();
 		}
 		else
 		{
 			draw.print_error();
-			getchar();
 		}
+		getchar();
 		draw.allegro_destroy();
 		cout << "Simulation finished" << endl;
 		

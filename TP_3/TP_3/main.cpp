@@ -11,9 +11,9 @@ extern "C"
 int
 main(int argc, char **argv)
 {
-	const char * test[9] = {"path", "-modo", "1","-width", "10", "-height", "5", "-robots", "5"};
+
 	robotSimData_n argsData = { 0, 0, 0, 0, 0 }; // Se inicializa con valores que los datos no pueden tomar para luego hacer su comparación y validación
-	if (parseCmdLine(9, test, cmd_line_interpreter, &argsData) == ERROR)
+	if (parseCmdLine(argc, argv, cmd_line_interpreter, &argsData) == ERROR)
 	{
 		how_to(argsData.errorType);
 
@@ -29,8 +29,6 @@ main(int argc, char **argv)
 			return -1;
 		}
 	}
-		
-	// CREAR COSAS PARA DIBUJAR
 
 	double unit = 1;
 	srand(time(NULL));
@@ -46,7 +44,9 @@ main(int argc, char **argv)
 	{
 		double tickCounters[MAX_SIM] = { 0 };
 		bool start = true;
-		for (int j = 1; (start || abs(tickCounters[j - 2] - tickCounters[j - 3]) > MIN_DIF_SIM) && j < MAX_SIM; j++)
+		int j;
+		cout << "Loading..." << endl;
+		for (j = 1; (start || abs(tickCounters[j - 2] - tickCounters[j - 3]) > MIN_DIF_SIM) && j < MAX_SIM; j++)
 		{
 			if (j > 1)
 			{
@@ -58,10 +58,15 @@ main(int argc, char **argv)
 				tickCounters[j - 1] += sim.simulate();
 				sim.destroy();
 			}
-			tickCounters[j - 1] /= AVERAGE_CONST;
-			cout << tickCounters[j - 1] << " Con " << j << " robots." << endl;	// REEMPLAZAR ESTO POR IMPRIMIR GRAFICO AL FINAL
+			
+			tickCounters[j - 1] /= AVERAGE_CONST; //promedio de ticks para #j robots
 		}
-		// ACA HAY QUE IMPRIMIR EL GRAFICO ENTERO.
+		cout << "Apriete cualquier boton para salir." << endl;
+		Drawer draw(tickCounters, j);
+		draw.allegro_init();
+		draw.draw_graph();
+		getchar();
+		draw.allegro_destroy();
 
 	}
 

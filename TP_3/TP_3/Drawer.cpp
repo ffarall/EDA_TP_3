@@ -1,12 +1,43 @@
 #include "Drawer.h"
 
-Drawer::Drawer(uint w, uint h, uint rc) 	//constructor
+Drawer::Drawer(uint w, uint h, uint rc) 	//constructor modo1
 {
 	Hcount = h;	//cantidad de baldosas en y
 	Wcount = w;	//cantidad de baldosas en x
 	dispHeight = Hcount * SINGLE_TILE;	//altura del display
 	dispWidth = Wcount * SINGLE_TILE;	//ancho del display
 	robotCount = rc;
+}
+
+Drawer::Drawer(double tickCounters[MAX_SIM], uint max_robots)	//constructor modo2
+{
+	Wcount = 9;
+	
+	if (tickCounters[0] > REF)
+	{
+		dispHeight = normalize2(tickCounters[0]) + EXTRA_SIZE + GRAPH_CONST;
+		for (uint i = 1; i <= max_robots; i++)
+		{
+			if (normalize2(tickCounters[i-1]) > MIN_VALUE2)
+			{
+				dispWidth = EXTRA_SIZE + 2 * GRAPH_CONST * (i + (i / 3));
+			}
+		}
+	}
+	else
+	{
+		dispHeight = normalize1(tickCounters[0]) + EXTRA_SIZE + GRAPH_CONST;
+		for (uint i = 1; i <= max_robots; i++)
+		{
+			if (normalize1(tickCounters[i-1]) > MIN_VALUE)
+			{
+				dispWidth = EXTRA_SIZE + 2 * GRAPH_CONST * (i + (i / 3));
+			}
+		}
+	}
+
+	robotCount = max_robots;
+	memcpy(tickCounter, tickCounters, sizeof(double)* MAX_SIM);
 }
 
 int Drawer::
@@ -51,7 +82,7 @@ allegro_init()	//inicializa todas las funciones de allegro
 		err.detail = "Error al iniciar el Display!";
 		res = 0;
 	}
-	font = al_load_ttf_font("sources/ARCADE_N.TTF", 15, 0);
+	font = al_load_ttf_font("sources/ARCADE_N.TTF", Wcount+2, 0);
 	if (font == NULL)
 	{
 		err.errorNum = AL_FONT_ERROR;
@@ -173,10 +204,87 @@ update_display(Robot * robots, Floor& f)	//hace el update del display a medida q
 void Drawer::
 show_ticks(uint ticks)	//muestra en pantalla los ticks utilizados
 {
-	char text[40];
-	snprintf(text, 40, "Numero de ticks: %d", ticks);
+	al_draw_filled_rectangle(dispWidth / 6.0, dispHeight / 4.0, 5.0*dispWidth / 6.0, 3.0*dispHeight / 4.0, al_map_rgb(255, 255, 0));
+	char text[MAX_OUTPUT];
+	snprintf(text, MAX_OUTPUT, "Numero de ticks: %d", ticks);
 	al_draw_text(font, al_map_rgb(0, 0, 0), dispWidth / 2.0, dispHeight / 2.0, ALLEGRO_ALIGN_CENTER, text);
 	al_flip_display();
 }
 
 //metodos de modo 2
+double Drawer::
+normalize1(double num)
+{
+	double res;
+	res = (num * SINGLE_TILE) / SCALE;
+	return res;
+}
+double Drawer::
+normalize2(double num)
+{
+	double res;
+	res = (num * SINGLE_TILE) / SCALE2;
+	return res;
+}
+
+void Drawer::
+draw_graph()
+{
+	al_clear_to_color(al_map_rgb(255, 255, 255));
+	
+	for (uint i = 1; i <= robotCount; i++ )
+	{
+		if (tickCounter[0] > REF)
+		{
+			if (normalize2(tickCounter[i - 1]) > MIN_VALUE2)
+			{
+				char text[TEXT];
+				snprintf(text,TEXT, "%d", i);
+				al_draw_filled_rectangle((i) *((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)), dispHeight - (EXTRA_SIZE / 2.0), (i) * ((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + SINGLE_TILE, dispHeight - (EXTRA_SIZE / 2.0) - normalize2(tickCounter[i - 1]), al_map_rgb(0, 0, 255));
+				double midpoint = ((i) *((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + (i) * ((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + SINGLE_TILE) / 2.0;
+				al_draw_text(font, al_map_rgb(0, 0, 0), midpoint, (dispHeight - EXTRA_SIZE / 2.0)+3, ALLEGRO_ALIGN_CENTER, text);
+			}
+		}
+		else
+		{
+			if (normalize1(tickCounter[i - 1]) > MIN_VALUE)
+			{
+				char text[TEXT];
+				snprintf(text, TEXT, "%d", i);
+				al_draw_filled_rectangle((i) *((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)), dispHeight - (EXTRA_SIZE / 2.0), (i) * ((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + SINGLE_TILE, dispHeight - (EXTRA_SIZE / 2.0) - normalize1(tickCounter[i - 1]), al_map_rgb(0, 0, 255));
+				double midpoint = ((i) *((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + (i) * ((GRAPH_CONST / 2.0) + (EXTRA_SIZE / 2.0)) + SINGLE_TILE) / 2.0;
+				al_draw_text(font,al_map_rgb(0,0,0),midpoint, (dispHeight - EXTRA_SIZE / 2.0)+3,ALLEGRO_ALIGN_CENTER, text);
+			}
+		}
+	}
+
+
+	al_draw_line(EXTRA_SIZE / 2.0, dispHeight - (EXTRA_SIZE / 2.0), EXTRA_SIZE / 2.0, EXTRA_SIZE / 2.0, al_map_rgb(0, 0, 0), 1.0);	//eje y
+	al_draw_line(EXTRA_SIZE / 2.0, dispHeight - (EXTRA_SIZE / 2.0), (dispWidth - EXTRA_SIZE / 2.0), dispHeight - (EXTRA_SIZE / 2.0), al_map_rgb(0, 0, 0), 1.0);	//eje x
+	
+	
+	int j = 0;
+	for (int i = dispHeight - (EXTRA_SIZE / 2); i >= EXTRA_SIZE / 2; i-= SINGLE_TILE)
+	{
+		char text[TEXT];
+		snprintf(text, TEXT, "%d", j);
+		al_draw_line(EXTRA_SIZE / 2.0 - 5, i, EXTRA_SIZE / 2.0 + 5, i, al_map_rgb(0, 0, 0), 1.0);
+		al_draw_text(font, al_map_rgb(0, 0, 0), EXTRA_SIZE / 2.0 - 15, i, ALLEGRO_ALIGN_CENTER, text);
+		j++;
+	}
+
+	if (tickCounter[0] > REF)
+	{
+		char text[MAX_OUTPUT];
+		snprintf(text, MAX_OUTPUT, "TICKS - ESCALA 1:%.1f", SCALE2);
+		al_draw_text(font, al_map_rgb(0, 0, 0), EXTRA_SIZE / 2.0,(EXTRA_SIZE / 2.0) - 15, ALLEGRO_ALIGN_LEFT, text);
+	}
+	else
+	{
+		char text[MAX_OUTPUT];
+		snprintf(text, MAX_OUTPUT, "TICKS - ESCALA 1:%.1f", SCALE);
+		al_draw_text(font, al_map_rgb(0, 0, 0), EXTRA_SIZE / 2.0, (EXTRA_SIZE / 2.0) - 15, ALLEGRO_ALIGN_LEFT, text);
+	}
+	
+	al_flip_display();
+}

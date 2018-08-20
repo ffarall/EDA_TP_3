@@ -1,7 +1,7 @@
 
 #include "callback.h"
 int
-cmd_line_interpreter(const char *key, const char *value, void *data)
+cmd_line_interpreter(char *key, char *value, void *data)
 {
 	int ret = 1;
 	robotSimData_n *simData = data;

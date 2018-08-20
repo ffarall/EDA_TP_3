@@ -11,9 +11,8 @@ extern "C"
 int
 main(int argc, char **argv)
 {
-	const char * test[9] = {"path", "-modo", "1","-width", "10", "-height", "5", "-robots", "5"};
-	robotSimData_n argsData = { 0, 0, 0, 0, 0 }; // Se inicializa con valores que los datos no pueden tomar para luego hacer su comparación y validación
-	if (parseCmdLine(9, test, cmd_line_interpreter, &argsData) == ERROR)
+	robotSimData_n argsData = { 0, 0, 0, 0, 0 }; // Se inicializa con valores que los datos no pueden tomar para luego hacer su comparaciÃ³n y validaciÃ³n
+	if (parseCmdLine(argc, argv, cmd_line_interpreter, &argsData) == ERROR)
 	{
 		how_to(argsData.errorType);
 

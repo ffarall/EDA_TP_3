@@ -4,6 +4,7 @@
 #include "Common_Header.h"
 #include "Floor.h"
 #include "Robot.h"
+#include "Drawer.h"
 
 class Simulator
 {
@@ -12,6 +13,7 @@ class Simulator
 	uint robotCount;
 	Robot * robots;
 	Floor floor;
+	Drawer draw;
 	double unit;
 	errorType_t err;
 

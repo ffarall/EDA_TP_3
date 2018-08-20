@@ -8,7 +8,7 @@ Floor::Floor(uint h, uint w)
 	{
 		for (int i = 0; i < (h*w); i++)
 		{
-			tiles[i] = true; // Se inicializan las baldozas sucias.
+			tiles[i] = DIRTY; // Se inicializan las baldosas sucias.
 		}
 		err.errorNum = NO_ERROR;
 	}
@@ -65,12 +65,12 @@ bool Floor::is_floorClean()
 
 void Floor::clean_tile(uint x, uint y)
 {
-	*(tiles + y * wCount + x) = false;
+	*(tiles + y * wCount + x) = CLEAN;
 }
 
 void Floor::clean_tile(pos_t pos)
 {
-	*(tiles + get_height(pos.y) * wCount + get_width(pos.x)) = false;
+	*(tiles + get_height(pos.y) * wCount + get_width(pos.x)) = CLEAN;
 }
 
 void Floor::destroy()

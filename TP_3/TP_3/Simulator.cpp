@@ -2,15 +2,15 @@
 
 
 Simulator::
-Simulator(uint rc, uint mod, uint w, uint h, double u) :floor(w, h)//,d( , , ...)//dibujator d
+Simulator(uint rc, uint mod, uint w, uint h, double u) :floor(h, w), draw(w, h, rc)
 {
 	robots = new Robot[rc]; //es el malloc de c++. se destruye con delete robot[](en el metodo destroy)
 	robotCount = rc;
 	mode = mod;
 	unit = u;
-	for (int i = 0; i < rc; i++)
+	for (uint i = 0; i < rc; i++)
 	{
-		robots[i].init_robot(w, h);
+		robots[i].init_robot(h, w);
 	}
 	tickCount = 0;
 	err.errorNum = NO_ERROR;
@@ -30,16 +30,28 @@ uint Simulator::simulate()
 {
 	if (mode == 1)
 	{
-		while (!(floor.is_floorClean()))
+		if (draw.allegro_init() == 1)
 		{
-			one_sim();
-			tickCount++;
-
-			cout << "Tick simulation" << endl;	// CAMBIAR POR DIBUJAR EL PISO
-			getchar();							// CAMBIAR POR ESPERA EN SEGUNDOS
+			draw.draw_init_display(robots);
+			while (!(floor.is_floorClean()))
+			{
+				one_sim();
+				tickCount++;
+				draw.update_display(robots, floor);	// CAMBIAR POR DIBUJAR EL PISO
+				al_rest(0.1);							// CAMBIAR POR ESPERA EN SEGUNDOS
+			}
+			draw.show_ticks(tickCount);
+			getchar();
 		}
+		else
+		{
+			draw.print_error();
+			getchar();
+		}
+		draw.allegro_destroy();
 		cout << "Simulation finished" << endl;
-
+		
+		
 		return tickCount;
 	}
 	else if (mode == 2)
@@ -56,14 +68,14 @@ uint Simulator::simulate()
 
 void Simulator::one_sim()
 {
-	for (int i = 0; i < robotCount; i++)
+	for (uint i = 0; i < robotCount; i++)
 	{
 #if _DEBUG_
 		cout << "Robot " << i << endl;
 #endif // _DEBUG_
 
 		pos_t robotPos = robots[i].get_robotPos();
-		if (floor.is_dirty(floor.get_width(robotPos.x), floor.get_height(robotPos.y)))	// Se limpia la baldoza donde está el robot.
+		if (floor.is_dirty(floor.get_width(robotPos.x), floor.get_height(robotPos.y)))	// Se limpia la baldosa donde está el robot.
 		{
 			floor.clean_tile(robotPos);
 		}

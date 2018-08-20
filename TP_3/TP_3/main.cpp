@@ -1,6 +1,7 @@
 #include "Robot.h"
 #include "Floor.h"
 #include "Simulator.h"
+#include "Drawer.h"
 extern "C"
 {
 #include "parse_cmd_line.h"
@@ -10,8 +11,9 @@ extern "C"
 int
 main(int argc, char **argv)
 {
+	const char * test[9] = {"path", "-modo", "1","-width", "10", "-height", "5", "-robots", "5"};
 	robotSimData_n argsData = { 0, 0, 0, 0, 0 }; // Se inicializa con valores que los datos no pueden tomar para luego hacer su comparación y validación
-	if (parseCmdLine(argc, argv, cmd_line_interpreter, &argsData) == ERROR)
+	if (parseCmdLine(9, test, cmd_line_interpreter, &argsData) == ERROR)
 	{
 		how_to(argsData.errorType);
 
@@ -29,7 +31,6 @@ main(int argc, char **argv)
 	}
 		
 	// CREAR COSAS PARA DIBUJAR
-
 
 	double unit = 1;
 	srand(time(NULL));

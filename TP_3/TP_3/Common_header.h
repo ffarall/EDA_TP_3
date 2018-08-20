@@ -11,8 +11,8 @@ INCLUDES
 /**********************************
 DEFINES
 **********************************/
-#define CLEAN true
-#define DIRTY false
+#define CLEAN false
+#define DIRTY true
 #define PI 3.14159265359
 #define PRECISION 1000
 #define MAX_SIM 10000
@@ -27,7 +27,7 @@ using namespace std;
 
 typedef unsigned int uint;
 
-typedef enum { NO_ERROR, NO_MEM } errNo_t;
+typedef enum { NO_ERROR, NO_MEM, AL_INIT_ERROR, AL_DISPLAY_ERROR, AL_ADDON_ERROR, AL_IMAGE_ERROR, AL_FONT_ERROR} errNo_t;
 
 typedef struct
 {

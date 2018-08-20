@@ -21,7 +21,7 @@ typedef int(*pCallback) (char *, char*, void *);
 			FUN PROTOTIPES
 *****************************************/
 int
-parseCmdLine(int argc, char *argv[], pCallback p, void *userData);
+parseCmdLine(int argc, const char *argv[], pCallback p, void *userData);
 
 
 #endif // _PARSE_CMD_LINE_
